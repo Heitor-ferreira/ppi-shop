@@ -26,7 +26,7 @@ export default function Checkout() {
                     <p> No items in cart!</p>
                 )}
             </div>
-            <h1>Cart Total: R$ {total}</h1>
+            <h1 id="cart-total-price">Cart Total: R$ {total}</h1>
 
             <Link to="/" className="product-actions">
                 <button>RETURN</button>

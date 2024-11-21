@@ -296,9 +296,11 @@ h1 {
 }
 
 .cart-checkout {
-  width: 80%;
+  width: 60%;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
 
   p {
     text-align: center;
@@ -359,12 +361,12 @@ h1 {
 
 .cart-body {
   display: flex;
-  background-color: #f5b744;
+  background-color: transparent;
   justify-content: space-between;
   align-items: center;
   border-radius: 2rem;
   padding: 2rem;
-  border: #edbf68 solid 0.2rem;
+  border: white solid 0.2rem;
   margin-bottom: 0.6rem;
   img {
     width: 9rem;
