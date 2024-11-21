@@ -41,7 +41,7 @@ export default function CartContextProvider({ children }) {
 
     // SHOPPING CART
 
-    
+
 
     function cartReducer(state, action) {
 
@@ -62,7 +62,7 @@ export default function CartContextProvider({ children }) {
                 updatedItems[existingCartItemIndex] = updatedItem;
                 setTotal((prevTotal) => prevTotal + existingCartItem.price);
             }
-            
+
             else {
                 const product = action.payload.products.find(
                     (product) => product.id === action.payload.id
@@ -73,7 +73,7 @@ export default function CartContextProvider({ children }) {
                     title: product.title,
                     price: product.price,
                     quantity: 1,
-                    
+
                 });
                 setTotal((prevTotal) => prevTotal + product.price);
             }
