@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Product from "./Product";
 import { CircularProgress } from "@mui/material";
 import { CartContext } from "../context/CartContext";
@@ -12,6 +12,13 @@ export default function Shop() {
     const searchInput = useRef("");
     const [filteredItems, setfilteredItems] = useState([]);
     
+
+    useEffect(() => {
+        if(products) {
+            setfilteredItems(products);
+        }
+    }, [products]);
+
     function handleSearch() {
         const term = searchInput.current.value.toLowerCase();
         setfilteredItems(
@@ -21,6 +28,7 @@ export default function Shop() {
 
     function clearSearch() {
         searchInput.current.value = "";
+        setfilteredItems(products);
     }
 
 
@@ -44,17 +52,20 @@ export default function Shop() {
 
             <ul id="products">
                 {error && <p>{error}</p>}
-                {!loading && products ? (
-                    products.map((product) => (
+                {loading &&
+                    <div id="loading">
+                        <CircularProgress size="10rem" color="inherit" />
+                        <p>Loading products...</p>
+                    </div>
+                }
+                {!loading && products && filteredItems.length > 0 ? (
+                    filteredItems.map((product) => (
                         <li key={product.id}>
                             <Product {...product} />
                         </li>
                     ))
                 ) : (
-                    <div id="loading">
-                        <CircularProgress size="10rem" color="inherit" />
-                        <p>Loading products...</p>
-                    </div>
+                    <p>Not Found!</p>
                 )}
             </ul>
 
