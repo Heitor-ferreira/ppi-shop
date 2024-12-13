@@ -1,12 +1,15 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import Product from "./Product";
+import Product from "./Card";
 import { CircularProgress } from "@mui/material";
-import { CartContext } from "../context/CartContext";
+import { Context } from "../context/Context";
 import styles from "./Shop.module.css";
+import FavBut from "./FavBut";
+import Skull from "./Skull";
+// import "./pop.css";
 
 export default function Shop() {
 
-    const { products, loading, error } = useContext(CartContext);
+    const { products, loading, error } = useContext(Context);
 
 
     const searchInput = useRef("");
@@ -33,8 +36,9 @@ export default function Shop() {
 
 
     return (
-        <section id="shop">
-            <h2>Elegant Products for Everyone</h2>
+        <div className="index">
+            <FavBut />
+
 
             <div className={styles.search_container}>
                 <div className={styles.search_box}>
@@ -42,15 +46,14 @@ export default function Shop() {
                     ref={searchInput}
                     className={styles.search_input}
                     type="text"
-                    placeholder="Type to search..."
+                    placeholder="Pesquisar..."
                     onChange={handleSearch}/>
 
-                    <button className={styles.search_clear} onClick={clearSearch}>CLEAR</button>
+                    <button className={styles.search_clear} onClick={clearSearch}>Limpar</button>
                 </div>
             </div>
 
-
-            <ul id="products">
+            <ul id="card-list">
                 {error && <p>{error}</p>}
                 {loading &&
                     <div id="loading">
@@ -69,6 +72,6 @@ export default function Shop() {
                 )}
             </ul>
 
-        </section>
+        </div>
     );
 }

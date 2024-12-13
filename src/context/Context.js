@@ -1,12 +1,11 @@
 import { createContext, useState, useEffect, useReducer } from "react";
 import { supabase } from "../utils/supabase";
 
-export const CartContext = createContext({
+export const Context = createContext({
     items: [],
     products: [],
     loading: false,
     error: "",
-    total: 0,
     addItemToCart: () => { },
     updateItemQuantity: () => { },
     subItemToCart: () => { }
@@ -14,12 +13,11 @@ export const CartContext = createContext({
 
 });
 
-export default function CartContextProvider({ children }) {
+export default function ContextProvider({ children }) {
 
     const [products, setProducts] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const [total, setTotal] = useState(0);
 
 
 
@@ -71,10 +69,8 @@ export default function CartContextProvider({ children }) {
             if (existingCartItem) {
                 const updatedItem = {
                     ...existingCartItem,
-                    quantity: existingCartItem.quantity + 1,
                 }
                 updatedItems[existingCartItemIndex] = updatedItem;
-                setTotal((prevTotal) => prevTotal + existingCartItem.price);
             }
 
             else {
@@ -85,11 +81,10 @@ export default function CartContextProvider({ children }) {
                     id: action.payload.id,
                     thumbnail: product.thumbnail,
                     title: product.title,
-                    price: product.price,
+                    description: product.description,
                     quantity: 1,
 
                 });
-                setTotal((prevTotal) => prevTotal + product.price);
             }
 
             return { items: updatedItems };
@@ -117,7 +112,6 @@ export default function CartContextProvider({ children }) {
                     updatedItems[existingCartItemIndex] = updatedItem;
                 }
 
-                setTotal((prevTotal) => prevTotal - existingCartItem.price);
             }
 
             return { items: updatedItems };
@@ -154,7 +148,7 @@ export default function CartContextProvider({ children }) {
     function handleAddItemToCart(id) {
         cartDispatch({
             type: "ADD_ITEM",
-            payload: { id, products }
+            payload: { id, products, }
         });
     }
 
@@ -177,14 +171,13 @@ export default function CartContextProvider({ children }) {
         products: products,
         loading: loading,
         error: error,
-        total: Math.abs(total.toFixed(2)),
         addItemToCart: handleAddItemToCart,
         updateItemQuantity: handleUpdateCartItemQuantity,
         subItemToCart: handleSubItemToCart
     };
 
-    return <CartContext.Provider value={ctx}>
+    return <Context.Provider value={ctx}>
         {children}
-    </CartContext.Provider>
+    </Context.Provider>
 
 }

@@ -1,18 +1,20 @@
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Shop from "./components/Shop";
-import Checkout from "./components/Checkout";
-import CartContextProvider from "./context/CartContext";
+import Shop from "./components/Index";
+import Checkout from "./components/Favorite";
+import ContextProvider from "./context/Context";
 
 function App() {
   return (
-    <CartContextProvider>
+    <ContextProvider>
+      <div className="header-position">
       <Header />
+      </div>
       <Routes>
         <Route path="/" element={<Shop />}/>
-        <Route path="/checkout" element={<Checkout />}/>
+        <Route path="/favorite" element={<Checkout />}/>
       </Routes>
-    </CartContextProvider>
+    </ContextProvider>
   );
 }
 

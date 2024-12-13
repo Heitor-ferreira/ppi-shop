@@ -1,20 +1,47 @@
-import { CartContext } from "../context/CartContext";
-import { useContext } from "react";
+import { Context } from "../context/Context";
+import { useContext, useState } from "react";
+import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
+import MoreIcon from '@mui/icons-material/More';
+import "./pop.css";
+import Popup from './Popup'; 
 
-export default function Cart({ id, thumbnail, title, price, quantity }) {
+export default function Cart({ id, thumbnail, title, description, }) {
 
-    const { addItemToCart, subItemToCart } = useContext(CartContext);
+    const {subItemToCart } = useContext(Context);
+
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const togglePopup = () => {
+        setIsPopupOpen(!isPopupOpen); 
+    };
+
+    
 
     return (
         <div className="cart-body">
-            <img src={thumbnail} alt={thumbnail} className="img-cart" />
+            <div className="cart-img">
+            <img src={thumbnail} alt={thumbnail}/>
+            </div>
+            <div className="title-cart">
             <h2>{title}</h2>
-            <p>R$ {price}</p>
+            <button className="more" onClick={togglePopup}><MoreIcon sx={{ fontSize: 40 }}/>
+            </button>
+            {isPopupOpen && (
+                <Popup 
+                    onClose={togglePopup} // Fecha o popup
+                    title={title} 
+                    description={description} 
+                    thumbnail={thumbnail} 
+                />
+            )}
+            </div>
             <div className="button-group">
-                <button onClick={() => subItemToCart(id)}>-</button>
-                <h2>{quantity}</h2>
-                <button onClick={() => addItemToCart(id)}>+</button>
+                <button onClick={() => subItemToCart(id)}>
+                    <BookmarkRemoveIcon  sx={{ fontSize: 40 }}/>
+                </button>
+
             </div>
         </div>
+        
     );
 }
