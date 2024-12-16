@@ -4,7 +4,7 @@ import { CircularProgress } from "@mui/material";
 import { Context } from "../context/Context";
 import styles from "./Shop.module.css";
 import FavBut from "./FavBut";
-import Skull from "./Skull";
+import "./Main.css";
 // import "./pop.css";
 
 export default function Shop() {
@@ -71,6 +71,7 @@ export default function Shop() {
                     <p>Not Found!</p>
                 )}
             </ul>
+
 
         </div>
     );

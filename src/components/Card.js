@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { Context } from "../context/Context";
-import "./pop.css";
+
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import MoreIcon from '@mui/icons-material/More';
+import Popup from './Popup';
+import "./Card.css";
 
 export default function Product({
     id,
@@ -11,49 +13,44 @@ export default function Product({
     description,
 }) {
     const { addItemToCart } = useContext(Context);
+
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };
 
+
     return (
-        <article className={`card-body ${isPopupOpen ? "no-hover" : ""}`}>
+        <div className="card-body">
+            <div className="card-img">
             <img src={thumbnail} alt={title} />
+            </div>
             <div className="card-content">
                 <div>
                     <h2>{title}</h2>
                 </div>
                 <p className="card-actions">
-                    <button 
-                        className="favoritar" 
+                    <button
                         onClick={() => addItemToCart(id)}
                     >
                         <BookmarkAddIcon sx={{ fontSize: 30 }} />
                     </button>
 
-                    <button
-                        className="saiba-mais-icon"
-                        onClick={togglePopup}
-                    >
-                        <MoreIcon sx={{ fontSize: 30 }} />
+                    <button onClick={togglePopup}><MoreIcon sx={{ fontSize: 30 }} />
                     </button>
+                    {isPopupOpen && (
+                        <Popup
+                            onClose={togglePopup} // Fecha o popup
+                            title={title}
+                            description={description}
+                            thumbnail={thumbnail}
+                        />
+                    )}
+
                 </p>
             </div>
 
-            {/* Condicionalmente renderizando o popup */}
-            {isPopupOpen && (
-                <div className="popup-overlay" onClick={togglePopup}>
-                    <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-button" onClick={togglePopup}>
-                            X
-                        </button>
-                        <h2 className="popup-title">{title}</h2>
-                        <img className="popup-image" src={thumbnail} alt={title}  />
-                        <p className="popup-description">{description}</p>
-                    </div>
-                </div>
-            )}
-        </article>
+        </div>
     );
 }

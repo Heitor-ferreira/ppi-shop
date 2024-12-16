@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../context/Context";
 import { useContext } from "react";
 import Cart from "./Cart";
+import "./Favorite.css";
 
 export default function Checkout() {
 

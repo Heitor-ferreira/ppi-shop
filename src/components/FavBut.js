@@ -4,6 +4,7 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { useContext } from "react";
 import { Context } from "../context/Context";
+import "./FavBut.css";
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({

@@ -13,6 +13,7 @@ export const Context = createContext({
 
 });
 
+
 export default function ContextProvider({ children }) {
 
     const [products, setProducts] = useState([]);
@@ -53,6 +54,7 @@ export default function ContextProvider({ children }) {
 
     // SHOPPING CART
 
+ 
 
 
     function cartReducer(state, action) {

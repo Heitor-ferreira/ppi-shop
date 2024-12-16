@@ -1,4 +1,4 @@
-
+import "./Header.css";
 
 export default function Header() {
 
@@ -6,7 +6,7 @@ export default function Header() {
         <>
             <header id="main-header">
                 <div id="main-title">
-                    <h1>Atlas dos ossos do corpo humano</h1>
+                    <h1>Atlas dos ossos</h1>
                 </div>
             </header>
         </>

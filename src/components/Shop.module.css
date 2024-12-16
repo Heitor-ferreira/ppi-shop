@@ -22,6 +22,7 @@
     outline: none;
     background-color: #f9f9f9; /* Cor inicial do fundo */
     transition: all 0.3s ease;  /* Transição suave para o aumento do campo */
+    font-family: "Playfair Display", serif;
 }
 
 /* Quando o campo de pesquisa for focado */
@@ -38,12 +39,13 @@
     padding: 12px 25px;  /* Aumenta o tamanho do botão */
     background-color: #ADD8E6; /* Muda a cor de fundo do botão para preto */
     color: white;  /* Garante que o texto do botão continue branco */
+    
 }
 
 /* Estilo para o botão de limpar */
 .search_clear {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1rem;
     background-color: #ADD8E6;
     color: white;
     font-weight: bold;
@@ -57,4 +59,45 @@
 .search_clear:hover {
     background-color: #add8e6d0;
     color: white;  /* Garante que o texto do botão seja branco */
+}
+
+@media (max-width: 768px) {
+    .search_input {
+        font-size: 0.8rem;
+    }
+
+    .search_input:focus{
+        font: 1rem;
+    }
+    .search_clear{
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .search_input {
+        font-size: 0.6rem;
+    }
+
+    .search_input:focus{
+        font: 0.8rem;
+    }
+
+    .search_clear{
+        padding: 2.5px 5px;
+        font-size: 0.6rem;
+    }
+
+    .search_box:focus-within .search_clear{
+        font-size: 1rem; 
+        padding: 6px 12.5px;
+        
+    }
+}
+
+@media (max-width: 320px) {
+
+    .search_clear{
+        padding: 1.25px 2.5px;
+    }
 }
